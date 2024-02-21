@@ -18,7 +18,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
+        String email = request.getParameter("email").toLowerCase(); // Convert email to lowercase
         String password = request.getParameter("pass");
 
         UserInfo uinfo = getUserInfo(email, password);
@@ -34,16 +34,27 @@ public class Login extends HttpServlet {
             ArrayList<Movie> movies = getMovieListForRole(uinfo.getRole());
             request.setAttribute("movieList", movies);
 
-            // Forward to the JSPs
-            if ("payed".equals(uinfo.getRole())) {
-                RequestDispatcher rd = request.getRequestDispatcher("watchMovie.jsp");
-                rd.forward(request, response);
-            } else if ("admin".equals(uinfo.getRole())) {
-                RequestDispatcher rd = request.getRequestDispatcher("adminPortal.jsp");
-                rd.forward(request, response);
-            } else if ("registered".equals(uinfo.getRole())) {
-                RequestDispatcher rd = request.getRequestDispatcher("subscription.jsp");
-                rd.forward(request, response);
+            if (null == uinfo.getRole()) { // Forward to the JSPs
+            } else {
+                switch (uinfo.getRole()) {
+                    case "payed":{
+                        RequestDispatcher rd = request.getRequestDispatcher("watchMovie.jsp");
+                        rd.forward(request, response);
+                        break;
+                    }
+                    case "admin":{
+                        RequestDispatcher rd = request.getRequestDispatcher("adminPortal.jsp");
+                        rd.forward(request, response);
+                        break;
+                    }
+                    case "registered":{
+                        RequestDispatcher rd = request.getRequestDispatcher("subscription.jsp");
+                        rd.forward(request, response);
+                        break;
+                    }
+                    default:
+                        break;
+                }
             }
         }
     }
@@ -65,35 +76,37 @@ public class Login extends HttpServlet {
         ArrayList<Movie> movies = new ArrayList<>();
 
         if ("payed".equals(role) || "registered".equals(role) ) {
-            
-            
-        //the normal subscription package and for registered accounts to see the movies
-           movies.add(new Movie("tangle 2", "images/111.jpg", ""));
-            movies.add(new Movie("Shrek 2", "images/222.jpg", ""));
-            movies.add(new Movie("Toy Story 6", "images/333.jpg", ""));
-            movies.add(new Movie("Ayeshas Great Adventure", "images/444.jpg", ""));
-             movies.add(new Movie("The Coder", "images/555.jpg", ""));
-              movies.add(new Movie("The Samiiost Movie", "images/666.jpg", ""));
+           //the normal subscription package and for registered accounts to see the movies
+           movies.add(new Movie("tangle 2", "images/111.jpg", "",""));
+            movies.add(new Movie("Shrek 2", "images/222.jpg", "",""));
+            movies.add(new Movie("Toy Story 6", "images/333.jpg", "",""));
+            movies.add(new Movie("The Beggers Journey", "images/999.jpg", "",""));
+             movies.add(new Movie("The Coder", "images/555.jpg", "",""));
+              movies.add(new Movie("The Samiiost Movie", "images/666.jpg", "",""));
+               movies.add(new Movie("Wasif, The Bengalis Journey", "images/777.jpg", "",""));
+              movies.add(new Movie("Sarah The slippery Snake", "images/1.11.jpg", "",""));
+              movies.add(new Movie("Anum, The Homeless Prodigy", "images/1.12.jpg", "",""));
+             movies.add(new Movie("Omran, The Dark Night", "images/1.13.jpg", "",""));
+             movies.add(new Movie("Taha, The Great Depression", "images/1.14.jpg", "",""));
+             
         }
-        
-        
         
         else if ("admin".equals(role)) {    
            //for the admin to see, he might have more movies that are not uploaded yet, not sure if thats what i want to go with, but as of now yes 
-          movies.add(new Movie("tangle 2", "images/111.jpg", ""));
-            movies.add(new Movie("Shrek 2", "images/222.jpg", ""));
-            movies.add(new Movie("Toy Story 6", "images/333.jpg", ""));
-            movies.add(new Movie("Ayeshas Great Adventure", "images/444.jpg", ""));
-             movies.add(new Movie("The Coder", "images/555.jpg", ""));
-              movies.add(new Movie("The Samiiost Movie", "images/666.jpg", ""));
-              
-              
-              
+          movies.add(new Movie("tangle 2", "images/111.jpg", "",""));
+            movies.add(new Movie("Shrek 2", "images/222.jpg", "",""));
+            movies.add(new Movie("Toy Story 6", "images/333.jpg", "",""));
+            movies.add(new Movie("The Beggers Journey", "images/999.jpg", "",""));
+             movies.add(new Movie("The Coder", "images/555.jpg", "",""));
+              movies.add(new Movie("The Samiiost Movie", "images/666.jpg", "",""));
+               movies.add(new Movie("Wasif, The Bengalis Journey", "images/777.jpg", "",""));
+              movies.add(new Movie("Sarah The slippery Snake", "images/1.11.jpg", "",""));
+              movies.add(new Movie("Sarah The slippery Snake", "images/1.12.jpg", "",""));
+             movies.add(new Movie("Omran, The Dark Night", "images/1.13.jpg", "",""));
+            boolean add = movies.add(new Movie("Taha, The Great Depression", "images/1.14.jpg", "",""));
         } 
         return movies;
     }
-    
-
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

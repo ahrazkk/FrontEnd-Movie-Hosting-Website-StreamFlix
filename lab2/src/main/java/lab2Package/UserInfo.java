@@ -4,9 +4,9 @@ public class UserInfo {
     
     
 
-    private String email;
-    private String password;
-    private String role;
+    private final String email;
+    private final String password;
+    private final String role;
 
     public UserInfo(String email, String password, String role) {
         this.email = email;
