@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to StreamFlix</title>
+    <!-- Using Bootstrap CSS for customization -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Your existing CSS */
+        .custom-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1; /* Ensure the form appears above particles */
+            background-color: rgba(255, 255, 255, 0.9); /* Adjust opacity as needed */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add shadow for better visibility */
+            animation: fadeEffect 0.5s ease;
+        }
+
+        @keyframes fadeEffect {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Ensure particles are behind other content */
+        }
+
+        .login-btn {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- particles.js container -->
+<div id="particles-js"></div>
+
+<!-- Welcome message -->
+<div class="custom-form">
+    <h1>Welcome to StreamFlix!</h1>
+    <p>We stream the latest movies right to your home.</p>
+    <a href="LoginRegister.jsp" class="btn btn-primary login-btn">Login</a>
+</div>
+
+<!-- Your existing scripts -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- particles.js lib - https://github.com/VincentGarreau/particles.js -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+
+<script>
+particlesJS("particles-js", {
+  particles: {
+    number: { value: 250, density: { enable: false, value_area: 800 } },
+    color: { value: "#000000" },
+    shape: {
+      type: "circle",
+      stroke: { width: 0, color: "#000000" },
+      polygon: { nb_sides: 5 },
+      image: { src: "img/github.svg", width: 100, height: 100 }
+    },
+    opacity: {
+      value: 1,
+      random: true,
+      anim: { enable: true, speed: 1, opacity_min: 0, sync: false }
+    },
+    size: {
+      value: 3.998400639744104,
+      random: true,
+      anim: {
+        enable: true,
+        speed: 2.4298777771478104,
+        size_min: 0.3,
+        sync: false
+      }
+    },
+    line_linked: {
+      enable: false,
+      distance: 150,
+      color: "#000000",
+      opacity: 0.4,
+      width: 1
+    },
+    move: {
+      enable: true,
+      speed: 1,
+      direction: "top",
+      random: true,
+      straight: false,
+      out_mode: "out",
+      bounce: false,
+      attract: { enable: true, rotateX: 600, rotateY: 600 }
+    }
+  },
+  interactivity: {
+    detect_on: "canvas",
+    events: {
+      onhover: { enable: true, mode: "repulse" },
+      onclick: { enable: false },
+      resize: true
+    },
+    modes: {
+      grab: { distance: 400, line_linked: { opacity: 1 } },
+      bubble: { distance: 250, size: 0, duration: 2, opacity: 0, speed: 3 },
+      repulse: { distance: 125, duration: 0.4 },
+      push: { particles_nb: 4 },
+      remove: { particles_nb: 2 }
+    }
+  },
+  retina_detect: true
+});
+</script>
+
+</body>
+</html>
